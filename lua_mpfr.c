@@ -194,7 +194,10 @@ static int fr_set(lua_State *L)
 	z = luaL_checkudata(L, 1, MPFR);
 	if (lua_isstring(L, 2)) {
 		r = _opt_rnd(L, 4);
-		mpfr_set_str(z, lua_tostring(L, 2), _opt_base(L, 3), r);
+		if (mpfr_set_str(z, lua_tostring(L, 2),
+				_opt_base(L, 3), r) != 0)
+			luaL_argerror(L, 2,
+				"not a valid number in given base");
 	} else {
 		r = _opt_rnd(L, 3);
 		switch (_check_value(L, 2, &v)) {
