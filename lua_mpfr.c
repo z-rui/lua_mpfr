@@ -668,7 +668,7 @@ static int fr_root(lua_State *L)
 		"out of range of unsigned long");
 	r = _opt_rnd(L, 4);
 
-	mpfr_root(z, x, k, r);
+	mpfr_rootn_ui(z, x, k, r);
 
 	lua_settop(L, 1);
 	return 1;
